@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 
+	"github.com/gazzenger/winssh-pageant/pageant"
 	"github.com/lxn/win"
 )
 
@@ -17,10 +18,12 @@ func main() {
 
 	// Start a proxy/redirector for the pageant named pipes
 	if !*noPageantPipe {
-		go pipeProxy()
+		go pageant.PipeProxy()
 	}
 
-	pageantWindow := createPageantWindow()
+	pageant.SshPipe = sshPipe
+
+	pageantWindow := pageant.CreatePageantWindow()
 	if pageantWindow == 0 {
 		fmt.Println(fmt.Errorf("CreateWindowEx failed: %v", win.GetLastError()))
 		return

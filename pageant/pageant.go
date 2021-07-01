@@ -1,4 +1,4 @@
-package main
+package pageant
 
 import (
 	"bufio"
@@ -30,6 +30,8 @@ var (
 
 	modkernel32          = syscall.NewLazyDLL("kernel32.dll")
 	procOpenFileMappingA = modkernel32.NewProc("OpenFileMappingA")
+
+	SshPipe *string
 )
 
 const (
@@ -80,7 +82,7 @@ func registerPageantWindow(hInstance win.HINSTANCE) (atom win.ATOM) {
 	return win.RegisterClassEx(&wc)
 }
 
-func createPageantWindow() win.HWND {
+func CreatePageantWindow() win.HWND {
 	inst := win.GetModuleHandle(nil)
 	atom := registerPageantWindow(inst)
 	if atom == 0 {
@@ -145,7 +147,7 @@ func wndProc(hWnd win.HWND, message uint32, wParam uintptr, lParam uintptr) uint
 			}
 
 			// result, err := sshagent.QueryAgent(*sshPipe, sharedMemoryArray[:size], sshagent.AgentMaxMessageLength)
-			result, err := sshagent.QueryAgent(*sshPipe, sharedMemoryArray[:size])
+			result, err := sshagent.QueryAgent(*SshPipe, sharedMemoryArray[:size])
 			copy(sharedMemoryArray[:], result)
 			// success
 			return 1
@@ -174,7 +176,7 @@ func capiObfuscateString(realname string) string {
 	return hex.EncodeToString(hash[:])
 }
 
-func pipeProxy() {
+func PipeProxy() {
 	currentUser, err := user.Current()
 	pipeName := fmt.Sprintf(agentPipeName, strings.Split(currentUser.Username, `\`)[1], capiObfuscateString(wndClassName))
 	listener, err := winio.ListenPipe(pipeName, nil)
@@ -213,7 +215,7 @@ func pipeListen(pageantConn net.Conn) {
 			return
 		}
 
-		result, err := sshagent.QueryAgent(*sshPipe, append(lenBuf, readBuf...))
+		result, err := sshagent.QueryAgent(*SshPipe, append(lenBuf, readBuf...))
 		if err != nil {
 			return
 		}
