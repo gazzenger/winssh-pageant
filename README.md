@@ -1,4 +1,4 @@
-![Go](https://github.com/ndbeals/winssh-pageant/workflows/Go/badge.svg)
+![Go](https://github.com/gazzenger/winssh-pageant/workflows/Go/badge.svg)
 # winssh-pageant
 Proxy Pageant requests to the Windows OpenSSH agent (from Microsoft), enabling applications that only support Pageant to use openssh.
 
@@ -12,12 +12,12 @@ This has been tested on Windows 10 2004 using WSL2. Earlier versions of windows 
 ## Installation
 Install the [Microsoft OpenSSH package, found on their Github](https://github.com/PowerShell/Win32-OpenSSH/releases). Do not install this using Windows update, that one is quite outdated, and will not work with this software.
 
-Download a compiled binary from the [releases page](https://github.com/ndbeals/winssh-pageant/releases) or otherwise build it yourself.
+Download a compiled binary from the [releases page](https://github.com/gazzenger/winssh-pageant/releases) or otherwise build it yourself.
 
 ### Building
 clone the repo and build it:
 ```
-git clone https://github.com/ndbeals/winssh-pageant.git
+git clone https://github.com/gazzenger/winssh-pageant.git
 cd winssh-pageant
 go build -ldflags -H=windowsgui
 ```
@@ -43,7 +43,7 @@ Until I decide on a better way to do this, you can auto-start this program by cr
 ### Antivirus Flagging
 Your antivirus software may flag this as malware, It's a false positive and a known quirk with go binaries (https://golang.org/doc/faq#virus). The official releases use reproducible builds via `-trimpath`. The expected checksums are posted with the release they're meant for, some users may choose to build this project themself and confirm the checksums, `sha256sum`.
 
-More information can be found here: https://github.com/ndbeals/winssh-pageant/issues/7#issuecomment-787520972
+More information can be found here: https://github.com/gazzenger/winssh-pageant/issues/7#issuecomment-787520972
 
 
 ## Bug Reporting, Help & Feature Requests
@@ -53,7 +53,7 @@ Please put report all
  - Help Requests
  - General Questsions
  
-[as an issue.](https://github.com/ndbeals/winssh-pageant/issues)
+[as an issue.](https://github.com/gazzenger/winssh-pageant/issues)
 
 
 ## Credits

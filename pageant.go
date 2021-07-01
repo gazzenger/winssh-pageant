@@ -20,8 +20,8 @@ import (
 
 	"encoding/hex"
 
-	"github.com/ndbeals/winssh-pageant/internal/security"
-	"github.com/ndbeals/winssh-pageant/internal/sshagent"
+	"github.com/gazzenger/winssh-pageant/internal/security"
+	"github.com/gazzenger/winssh-pageant/internal/sshagent"
 )
 
 var (

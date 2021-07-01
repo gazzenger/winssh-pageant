@@ -1,4 +1,4 @@
-module github.com/ndbeals/winssh-pageant
+module github.com/gazzenger/winssh-pageant
 
 go 1.14
 
